@@ -1,61 +1,82 @@
 const express = require ("express")
-const  {usersModel,databaseUrl} = require ("./db")
+//const bcrypt =require ("bcrypt")
+//const  {usersModel,databaseUrl} = require ("./tenant/db")
 
-const mongoose=require("mongoose")
+// const mongoose=require("mongoose")
 const router = express.Router()
 
-// connect to database and set up the schema
-mongoose.connect(databaseUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-});
+//chirias
+const tenantsModule = require('./tenants')
+router.use('/tenants', tenantsModule)
+//owner
+const ownersModule = require('./owners')
+router.use('/owners', ownersModule)
+//meserias
+const workersModule = require('./workers')
+router.use('/workers', workersModule)
 
-// Get the default connection
-let db = mongoose.connection;
+// // connect to database and set up the schema
+// mongoose.connect(databaseUrl, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true
+// });
 
-// Open connection
-db.once('open', () => {
-    console.log('Connection to UsersDB open.');
-});
+// // Get the default connection
+// let db = mongoose.connection;
 
-// Handle potential errors
-db.on('error', console.error.bind(console, "Something went wront with UsersDB.."));
+// // Open connection
+// db.once('open', () => {
+//     console.log('Connection to UsersDB open.');
+// });
 
-router.get("/login", (req,res)=>{
+// // Handle potential errors
+// db.on('error', console.error.bind(console, "Something went wront with UsersDB.."));
 
-    res.send("suntem in login auth")
-})
-router.get("/signup", (req,res)=>{
+// router.get("/login", (req,res)=>{
 
-    res.send("suntem in signup auth")
-})
-router.post("/login", (req,res,next)=>{
+//     res.send("suntem in login auth")
+// })
+// router.get("/signup", (req,res)=>{
 
-    //ati reusit sa va conectati, functie
-    res.send("v ati conectat")
-})
-router.post("/signup", async (req,res,next)=>{
+//     res.send("suntem in signup auth")
+// })
+// router.post("/login", async (req,res,next)=>{
+//     try {
+//         const user=await usersModel.findOne({
+//             email:req.body.email
+//         })
+//         if (user==null)
+//         {
+//             next(new Error("userul cu aces email nu exista"))
+//         }
+//         const isPasCorect= await bcrypt.compare(req.body.password, user.password)
+//         if(!isPasCorect)
+//         {
+//             next(new Error("Parola nu este corecta"))
+//         }
+//         res.send(user.username)
+//     } catch (error) {
+//         next(error)
+//     }
     
-    console.log("suntem in signup post")
-    console.log(`suntem pe userul ${req.body.username}`)   
-    const newUser=new usersModel({
-        fullname : req.body.fullname,
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-        
-    })
-    try {
-        console.log("suntem in try")
-        await newUser.save()
-        console.log("suntem in try")
-        
-        res.send(`am inregistrat userul cu usernameul:${req.body.username}`)    
-    } catch (error) {
-        next(error)
-    }
-})
+// })
+// router.post("/signup", async (req,res,next)=>{
+    
+//     const newUser=new usersModel({
+//         fullname : req.body.fullname,
+//         username: req.body.username,
+//         email: req.body.email,
+//         password: await bcrypt.hash(req.body.password,12)
+//     })
+
+//     try {
+//         await newUser.save()
+//         res.send(`am inregistrat userul cu usernameul:${req.body.username}`)    
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 module.exports=router
 

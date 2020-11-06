@@ -2,14 +2,12 @@ const express = require ("express")
 const cors = require ("cors")
 const volleyball = require ("volleyball")
 // const bodyParser=require("body-parser")
-const app=express()
 
+const app=express()
+app.use(express.json())
 app.use(cors())
 app.use(volleyball)
-app.use(express.json())
 
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({ extended: false }))
 
 const authModule = require('./routes/auth')
 app.use('/auth', authModule)
@@ -19,9 +17,9 @@ app.get("/home", (req,res) => {
     res.send("Bunaaa")
 
 })
-app.post("home", (req,res)=>{
+app.post('/home', (req,res)=>{
     
-    res.send("suntem in home req  " + req.body.username)
+    res.send("suntem in home req ")
 })
 app.use((err, req, res, next) => {
     //console.error(err.stack)

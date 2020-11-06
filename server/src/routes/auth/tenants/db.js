@@ -1,8 +1,7 @@
 const mongoose = require("mongoose")
-
 const databaseUrl="mongodb://127.0.0.1/hackathon"
 
-const schemaUsers=new mongoose.Schema({
+const schemaTenants=new mongoose.Schema({
 
     fullname:{
         type: String,
@@ -27,15 +26,32 @@ const schemaUsers=new mongoose.Schema({
     password: { 
         type: String, 
         min: 8, 
-        required: true 
-    }
-
+        required: true
+    },
+    //dif
+    ownerID:{
+        type: mongoose.Schema.Types.ObjectId
+    },
+    listIssues:[mongoose.Schema.Types.ObjectId],
+    listBills:[{
+        year:Number ,  
+        month:Number,
+        deadline:Date,
+        priceRent:Number,
+        priceGas:Number,
+        priceElectricity:Number,
+        priceWater:Number,
+        //url de imagini
+        urlRent:String,
+        urlGas:String,
+        urlELectricity:String,
+        urlWater:String,
+    }]
 
 })
 
-const usersModel=mongoose.model("users",schemaUsers)
+const tenantsModel=mongoose.model("tenants",schemaTenants)
 module.exports={
-
     databaseUrl,
-    usersModel
+    tenantsModel
 }
