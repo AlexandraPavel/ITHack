@@ -41,8 +41,9 @@
                     email: this.email,
                     password: this.password
                 });
-
+                this.$store.commit("SET_CURRENTTLY_LOGGED_USER", response.data.username);
                 alert("Welcome " + response.data.username + "!");
+                this.$router.push('/tenant') 
             }
             catch(error) {
                 alert(error.message);

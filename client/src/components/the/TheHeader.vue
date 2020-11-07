@@ -1,7 +1,7 @@
 <template>
     <section id='wrapper-the-header' class="main-section">
         <article id="profile-section">
-
+            <span>{{loggedUsername}}</span>
         </article>
         <button id="button-hamburger-menu"> 
             <img src="../../assets/img/hamburger-menu.svg" alt="">
@@ -16,7 +16,9 @@
 
     @Component({})
     export default class TheHeader extends Vue {
-       
+       get loggedUsername() {
+           return this.$store.state.loggedUsername;
+       }
     }
 </script>
 
