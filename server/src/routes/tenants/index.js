@@ -4,7 +4,7 @@ const {tenantsModel}=require("../auth/tenants/db")
 const router=express.Router()
 
 //pagina de facturi
-router.get("/conthome",async(req,res,next)=>{ ////// ERA POST INAINTE AICI
+router.post("/conthome",async(req,res,next)=>{ ////// ERA POST INAINTE AICI
     //req primeste anul, luna, id user
     const user = await tenantsModel.findOne({
         username:req.body.username
@@ -18,15 +18,15 @@ router.get("/conthome",async(req,res,next)=>{ ////// ERA POST INAINTE AICI
     console.log("Userul exista")
     for(const undeSuntem in user.listBills)
     {
-        if(req.body.year==undeSuntem.year)
+        if(req.body.year==user.listBills[undeSuntem].year)
         { 
-            if (req.body.month==undeSuntem.month)
+            if (req.body.month==user.listBills[undeSuntem].month)
             {
                 res.json({
-                    priceRent:undeSuntem.priceRent,
-                    priceGas:undeSuntem.priceGas,
-                    priceElectricity:undeSuntem.priceElectricity,
-                    priceWater:undeSuntem.priceWater
+                    priceRent:user.listBills[undeSuntem].priceRent,
+                    priceGas:user.listBills[undeSuntem].priceGas,
+                    priceElectricity:user.listBills[undeSuntem].priceElectricity,
+                    priceWater:user.listBills[undeSuntem].priceWater
                 })
                 return;
             }

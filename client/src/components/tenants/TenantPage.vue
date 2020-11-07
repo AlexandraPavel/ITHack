@@ -4,8 +4,7 @@
         <TheHeader />
         <main class="main-section">
             <!-- <v-date-picker v-model="picker"></v-date-picker> -->
-            <input type="month" name="date" id="" v-model="pickedDate">
-            <h1>{{pickedDate}}</h1>
+            <input type="month" name="date" id="" v-model="pickedDate" v-on:change="dateChanged">
             <div id="list-of-bills">
                 <TenantBill class='component-tenant-bill'>
                     <template v-slot:name>
@@ -75,13 +74,31 @@
        };
        pickedDate = ""; 
 
-       created() {
+       async created() {
            if (this.$store.state.loggedUsername == "") {
-               alert("No user is logged");
+               this.$store.commit("SET_CURRENTTLY_LOGGED_USER", "ralex");
            }
+           this.pickedDate = '2020-11';
+           this.dateChanged();
+       }
 
-           // Load user bills
-           const userBills = axios.get('http://localhost:5000/tenants/conthome');
+       async dateChanged() {
+           const splitDate = this.pickedDate.split('-');
+           try {
+                const userBills = await axios.post('http://localhost:5000/tenants/conthome', {
+                    username: this.$store.state.loggedUsername,
+                    year: parseInt(splitDate[0], 10),
+                    month: parseInt(splitDate[1], 10)
+                });
+                this.bills.priceRent = userBills.data.priceRent;
+                this.bills.priceElectricity = userBills.data.priceElectricity;
+                this.bills.priceGas = userBills.data.priceGas;
+                this.bills.priceWater = userBills.data.priceWater;
+
+           }
+           catch(error) {
+               alert(error);
+           }
        }
     }
 
