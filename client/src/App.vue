@@ -1,6 +1,6 @@
 <template>
     <div id='wrapper-app'>
-        <h1>Nunito</h1>
+
     </div>
 </template>
 
