@@ -2,7 +2,7 @@
     <div id='wrapper-tenant-bill'>
         <h2><slot name="name" /></h2>
         <h3><slot name="price" /></h3>
-        <button>Pay it</button>
+        <button id="button-pay" v-on:click="addBill()" v-bind:class="{ active: isActive }">Pay it</button>
     </div>
 </template>
 
@@ -10,9 +10,16 @@
     import Vue from 'vue';
     import { Component, Prop } from 'vue-property-decorator';
 
+    
 
     @Component({})
     export default class TenantBill extends Vue {
+        isActive= false;
+
+        addBill() {
+            this.isActive = !this.isActive;
+            this.$store.commit("CHANGE_SHOW_BOX");
+        }
     }
 </script>
 
@@ -48,5 +55,9 @@
         font-size: 1.5rem;
         color: white;
         font-weight: 800;
+    }
+
+    .active {
+        background-color: #7F40FF;
     }
 </style>
