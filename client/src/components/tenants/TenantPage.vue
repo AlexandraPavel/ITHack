@@ -46,6 +46,12 @@
                     </template>
                 </TenantBill>
             </div>
+
+            <div v-if="exists()" id="box">
+                <label for="">PRICE: </label>
+                <input type="text">
+                <button type="submit"> CONFIRM </button>
+            </div>
         </main>
     </div>
 </template>
@@ -94,12 +100,15 @@
                 this.bills.priceElectricity = userBills.data.priceElectricity;
                 this.bills.priceGas = userBills.data.priceGas;
                 this.bills.priceWater = userBills.data.priceWater;
-
            }
            catch(error) {
                alert(error);
            }
        }
+
+        exists() {
+            return this.$store.state.showBox;
+        }
     }
 
 </script>
@@ -117,7 +126,30 @@
     }
 
     #list-of-bills {
-        margin-top: 15vh;
+        margin-top: 5vh;
         display: flex;
+    }
+
+    input {
+        margin-top: 6vh;
+        font-size: 3rem;
+        background-color: white;   
+    }
+
+    #box {
+        width: 90vw;
+        height: 40vh;
+        background-color: #29E298;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        margin-top: 3vh;
+        background-color: white;
+        width: 30vw;
+        height: 8vh;
     }
 </style>
