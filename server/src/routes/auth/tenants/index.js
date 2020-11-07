@@ -11,7 +11,6 @@ mongoose.connect(databaseUrl, {
     useUnifiedTopology: true,
     useCreateIndex: true
 });
-
 // Get the default connection
 let db = mongoose.connection;
 
@@ -45,7 +44,9 @@ router.post("/login", async (req,res,next)=>{
         {
             next(new Error("Parola nu este corecta"))
         }
+
         res.send(user.username)
+
     } catch (error) {
         next(error)
     }
@@ -62,7 +63,8 @@ router.post("/signup", async (req,res,next)=>{
 
     try {
         await newUser.save()
-        res.send(`am inregistrat tenant ul cu usernameul:${req.body.username}`)    
+        res.send(`am inregistrat tenant ul cu usernameul:${req.body.username}`)   
+
     } catch (error) {
         next(error)
     }
