@@ -1,6 +1,6 @@
 <template>
-    <div id='wrapper-app'>
-      <router-view />
+    <div id='wrapper-owner-page'>
+        
     </div>
 </template>
 
@@ -10,11 +10,11 @@
 
 
     @Component({})
-    export default class App extends Vue {
+    export default class OwnerPage extends Vue {
        
     }
 </script>
 
 <style lang='scss' scoped>
-  
+    
 </style>
