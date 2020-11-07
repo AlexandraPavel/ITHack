@@ -39,7 +39,7 @@ router.get("/signup", (req,res)=>{
 })
 router.post("/login", async (req,res,next)=>{
     try {
-        const user=await usersModel.findOne({
+        const user=await ownersModel.findOne({
             email:req.body.email
         })
         if (user==null)
