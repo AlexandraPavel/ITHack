@@ -1,6 +1,6 @@
 <template>
-    <div id='wrapper-app'>
-      <router-view />
+    <div id='wrapper-log-in'>
+        <h1>Log in</h1>
     </div>
 </template>
 
@@ -10,7 +10,7 @@
 
 
     @Component({})
-    export default class App extends Vue {
+    export default class LogIn extends Vue {
        
     }
 </script>

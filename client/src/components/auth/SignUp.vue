@@ -1,6 +1,6 @@
 <template>
-    <div id='wrapper-app'>
-      <router-view />
+    <div id='wrapper-sign-up'>
+        <h1>Sign up</h1>
     </div>
 </template>
 
@@ -10,7 +10,7 @@
 
 
     @Component({})
-    export default class App extends Vue {
+    export default class SignUp extends Vue {
        
     }
 </script>
