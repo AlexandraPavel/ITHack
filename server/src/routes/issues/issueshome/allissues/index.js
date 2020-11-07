@@ -1,9 +1,13 @@
 const express = require ("express")
 const { Mongoose } = require("mongoose")
 const router = express.Router()
+console.log("sunt in issue all")
 
-router.get("/allissues", async (req,res)=>{
+router.get('/', async (req,res)=>{
     //primesc id ul
+    console.log("sunt in issue all2")
+    res.send("o sa trimit lista problemelor")
+    
     const user=await tenantsModel.findOne({
         _id:req.body.userId
     })
@@ -22,3 +26,4 @@ router.get("/allissues", async (req,res)=>{
         })
     }
 })
+module.exports=router
