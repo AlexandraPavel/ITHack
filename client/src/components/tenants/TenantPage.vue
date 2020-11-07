@@ -57,8 +57,8 @@
     import { Component } from 'vue-property-decorator';
     import TheHeader from '@/components/the/TheHeader.vue';
     import TenantBill from '@/components/tenants/TenantBill.vue';
-    import Vuetify from 'vuetify'
-
+    import Vuetify from 'vuetify';
+    import axios from 'axios';
 
     @Component({
         components: {
@@ -74,6 +74,15 @@
            priceWater: 12.12
        };
        pickedDate = ""; 
+
+       created() {
+           if (this.$store.state.loggedUsername == "") {
+               alert("No user is logged");
+           }
+
+           // Load user bills
+           const userBills = axios.get('http://localhost:5000/tenants/conthome');
+       }
     }
 
 </script>

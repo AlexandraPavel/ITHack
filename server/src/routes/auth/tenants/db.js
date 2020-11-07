@@ -36,7 +36,7 @@ const schemaTenants=new mongoose.Schema({
     listBills:[{
         year:Number ,  
         month:Number,
-        deadline:Date,
+        deadline:String,
         priceRent:Number,
         priceGas:Number,
         priceElectricity:Number,
@@ -45,7 +45,7 @@ const schemaTenants=new mongoose.Schema({
         urlRent:String,
         urlGas:String,
         urlELectricity:String,
-        urlWater:String,
+        urlWater:String
     }]
 
 })
