@@ -3,17 +3,9 @@
     <div id='wrapper-tenant-page'>
         <TheHeader />
         <main class="main-section">
-            <h1>asdasd</h1>
-            <v-btn>Press me</v-btn>
-
-
-            <v-date-picker 
-                no-title
-                header-color="#29E298"
-                color="#29E298"
-            >
-            </v-date-picker>
-
+            <!-- <v-date-picker v-model="picker"></v-date-picker> -->
+            <input type="month" name="date" id="" v-model="pickedDate">
+            <h1>{{pickedDate}}</h1>
             <div id="list-of-bills">
                 <TenantBill class='component-tenant-bill'>
                     <template v-slot:name>
@@ -59,11 +51,14 @@
     </div>
 </template>
 
+
 <script lang='ts'>
     import Vue from 'vue';
     import { Component } from 'vue-property-decorator';
     import TheHeader from '@/components/the/TheHeader.vue';
     import TenantBill from '@/components/tenants/TenantBill.vue';
+    import Vuetify from 'vuetify'
+
 
     @Component({
         components: {
@@ -78,7 +73,9 @@
            priceElectricity: 45.00,
            priceWater: 12.12
        };
+       pickedDate = ""; 
     }
+
 </script>
 
 <style lang='scss' scoped>
