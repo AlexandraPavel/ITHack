@@ -39,7 +39,7 @@ router.get("/signup", (req,res)=>{
 })
 router.post("/login", async (req,res,next)=>{
     try {
-        const user=await usersModel.findOne({
+        const user=await workersModel.findOne({
             email:req.body.email
         })
         if (user==null)
@@ -51,7 +51,9 @@ router.post("/login", async (req,res,next)=>{
         {
             next(new Error("Parola nu este corecta"))
         }
-        res.send(user.username)
+        res.json({
+            username: user.username
+        });
     } catch (error) {
         next(error)
     }
