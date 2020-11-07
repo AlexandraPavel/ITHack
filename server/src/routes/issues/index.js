@@ -13,24 +13,12 @@ console.log("sunt in issue")
 // router.use("/issuehome/allissues",allissuesModule)
 // const newissueModule = require('./issueshome/newissue')
 // router.use('/newissue', newissueModule)
+
+
 router.get('/issueshome/allissues',async (req,res,next)=>{
 //primesc id ul
-    const user=await tenantsModel.findOne({
-       username:req.body.username
-    })
-    if (user==null)
-        {
-            next(new Error("userul cu aces email nu exista"))
-        }
-    for(const undeSuntem in user.listIssue)
-    {
-        res.json({
-            title:undeSuntem.title,
-            description:undeSuntem.description,
-            isSolved:undeSuntem.isSolved,
-            priceIfIsSolved:undeSuntem.price
-        })
-    }
+ const allIssues= issuesModel.find()
+ res.send(allIssues)
 })
 router.post('/issueshome/newissue', async (req,res,next)=>{
     console.log("baaaai")
