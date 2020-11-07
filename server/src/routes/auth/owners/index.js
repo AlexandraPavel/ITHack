@@ -51,7 +51,9 @@ router.post("/login", async (req,res,next)=>{
         {
             next(new Error("Parola nu este corecta"))
         }
-        res.send(user.username)
+        res.json({
+            username: user.username
+        });
     } catch (error) {
         next(error)
     }
